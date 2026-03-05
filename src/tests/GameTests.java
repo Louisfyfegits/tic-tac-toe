@@ -10,14 +10,14 @@ class GameTests{
 
     @Test
     void testInitialPlayerIsX() {
-        Game game = new Game();
+        Game game = new Game(false);
         assertEquals(Token.X, game.getCurrentPlayer());
     }
 
 
     @Test
     void testMakeMove() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(0, 0);
         assertEquals(Token.O, game.getCurrentPlayer());
         assertThrows(IllegalArgumentException.class, () -> game.makeMove(0, 0));
@@ -27,7 +27,7 @@ class GameTests{
 
     @Test
     void testHasWonRow() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(0, 0); // X
         game.makeMove(1, 0); // O
         game.makeMove(0, 1); // X
@@ -38,7 +38,7 @@ class GameTests{
     
     @Test
     void testHasWonColumn() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(0, 0); // X
         game.makeMove(0, 1); // O
         game.makeMove(1, 0); // X
@@ -49,7 +49,7 @@ class GameTests{
 
     @Test
     void testHasWonDiagonal() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(0, 0); // X
         game.makeMove(0, 1); // O
         game.makeMove(1, 1); // X
@@ -59,7 +59,7 @@ class GameTests{
     }
     @Test
     void testHasWonDiagonal2() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(0, 2); // X 
         game.makeMove(0, 1); // O
         game.makeMove(1, 1); // X 
@@ -70,7 +70,7 @@ class GameTests{
     
     @Test
     void testHasWonDiagonalCenterButNoWin() {
-        Game game = new Game();
+        Game game = new Game(false);
         game.makeMove(1, 1); // X in center
         // Now: center is X, but no diagonal win
         assertFalse(game.hasWon());
@@ -78,7 +78,7 @@ class GameTests{
 
     @Test
     void testHasDrawn() {
-        Game game = new Game();
+        Game game = new Game(false);
         // Fill the board without a winner
         game.makeMove(0, 0); // X
         game.makeMove(1, 1); // O
@@ -92,21 +92,21 @@ class GameTests{
         assertTrue(game.hasDrawn());
         assertFalse(game.hasWon());
         
-        game = new Game();
+        game = new Game(false);
         assertFalse(game.hasDrawn());  
     }
  
 
     @Test
     void testGetBoard() {
-        Game game = new Game();
+        Game game = new Game(false);
         assertNotNull(game.getBoard());
         game.makeMove(0, 0);
         assertEquals(Token.X, game.getBoard().getToken(0, 0));
     }
     @Test
     void testResetGame() {
-        Game g = new Game();
+        Game g = new Game(false);
         // Make some moves to make the board "dirty"
         g.makeMove(0, 0);
         g.makeMove(1, 1);

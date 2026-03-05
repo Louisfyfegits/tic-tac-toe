@@ -62,6 +62,14 @@ public class Board {
 	    }
 	    board[i][j] = t;
 	}
+
+    public int getTokenCount() {
+        int count = 0;
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++)
+                if (board[i][j] != Token.EMPTY) count++;
+        return count;
+    }
 		
 	public String toString() {
 		StringBuilder sb = new StringBuilder("\n");

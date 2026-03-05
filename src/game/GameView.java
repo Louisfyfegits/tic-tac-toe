@@ -13,10 +13,12 @@ public class GameView {
     private JLabel stateLabel;
     private JButton[][] buttons;
     private Game game;
+    private final boolean vsAI;
 
-    public GameView() {
+    public GameView(boolean vsAI) {
         this.buttons = new JButton[3][3];
-        this.game = new Game();
+        this.game = new Game(vsAI);
+        this.vsAI = vsAI;
     }
 
     public void buildGui(JFrame frame) {
@@ -109,13 +111,20 @@ public class GameView {
     }
 
     private void onCellClick(int row, int col) {
+        if (game.hasWon() || game.hasDrawn()) return;
         try {
             game.makeMove(row, col);
         } catch (IllegalArgumentException e) {
             return;
         }
-        buttons[row][col].setText(game.getBoard().getToken(row, col).getDisplayText());
+        updateBoard();
         updateGameStatus();
+    }
+
+    private void updateBoard() {
+        for (int row = 0; row < 3; row++)
+            for (int col = 0; col < 3; col++)
+                buttons[row][col].setText(game.getBoard().getToken(row, col).getDisplayText());
     }
 
     private void onReset() {

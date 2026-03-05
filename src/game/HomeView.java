@@ -6,7 +6,7 @@ import java.awt.*;
 public class HomeView {
 
     private JFrame frame;
-    private GameView gameView = new GameView();
+    private GameView gameView;
     private JButton vsPlayerButton;
     private JButton vsAIbutton;
 
@@ -24,7 +24,15 @@ public class HomeView {
         vsPlayerButton = UI.createButton("VS Player");
         vsAIbutton = UI.createButton("VS AI");
 
-        vsPlayerButton.addActionListener(e -> gameView.buildGui(frame));
+        vsPlayerButton.addActionListener(e -> {
+            this.gameView = new GameView(false);
+            gameView.buildGui(frame);
+        });
+
+        vsAIbutton.addActionListener(e -> {
+            this.gameView = new GameView(true);
+            gameView.buildGui(frame);
+        });
 
         JLabel title = UI.createTitle("Tic Tac Toe");
 
