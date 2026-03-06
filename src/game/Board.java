@@ -63,6 +63,10 @@ public class Board {
 	    board[i][j] = t;
 	}
 
+    public void removeToken(int i, int j) {
+        board[i][j] = Token.EMPTY;
+    }
+
     public int getTokenCount() {
         int count = 0;
         for (int i = 0; i < SIZE; i++)

@@ -13,12 +13,11 @@ public class GameView {
     private JLabel stateLabel;
     private JButton[][] buttons;
     private Game game;
-    private final boolean vsAI;
 
-    public GameView(boolean vsAI) {
+
+    public GameView(Difficulty difficulty) {
         this.buttons = new JButton[3][3];
-        this.game = new Game(vsAI);
-        this.vsAI = vsAI;
+        this.game = new Game(difficulty);
     }
 
     public void buildGui(JFrame frame) {
