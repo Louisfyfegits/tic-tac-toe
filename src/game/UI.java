@@ -9,12 +9,13 @@ public class UI {
     public static final Color LIGHT_YELLOW = new Color(250, 250, 150);
     public static final Font FONT = new Font("Segoe UI", Font.PLAIN, 16);
 
+    // standard button for the game
     public static JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setBackground(LIGHT_YELLOW);
         button.setForeground(DARK_BLUE);
         button.setFont(FONT);
-        button.setFocusPainted(false);
+        button.setFocusPainted(false); // gets rid of the dotted border when clicked
         button.setBorderPainted(false);
         button.setContentAreaFilled(true);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -22,6 +23,7 @@ public class UI {
         return button;
     }
 
+    //title creation
     public static JLabel createTitle(String text) {
         JLabel label = new JLabel(text);
         label.setForeground(LIGHT_YELLOW);

@@ -1,5 +1,6 @@
 package game;
 
+// picks a random empty cell to place on
 class DumbAI implements PlayerAI {
     private final Board board;
 
@@ -9,12 +10,11 @@ class DumbAI implements PlayerAI {
 
     @Override
     public void makeMove(Board.Token token) {
-        System.out.println("UnbeatableAI  dumb makeMove called");
         int row, col;
         do {
             row = (int) (Math.random() * 3);
             col = (int) (Math.random() * 3);
-        } while (board.getToken(row, col) != Board.Token.EMPTY); // keep rolling until empty cell found
-        board.placeToken(token, row, col); // place on the first empty cell found
+        } while (board.getToken(row, col) != Board.Token.EMPTY); // keep rolling until an empty cell is found
+        board.placeToken(token, row, col);
     }
 }

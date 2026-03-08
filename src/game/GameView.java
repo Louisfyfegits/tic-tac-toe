@@ -14,12 +14,12 @@ public class GameView {
     private JButton[][] buttons;
     private Game game;
 
-
     public GameView(Difficulty difficulty) {
         this.buttons = new JButton[3][3];
         this.game = new Game(difficulty);
     }
 
+    // clears the frame and rebuilds the game screen
     public void buildGui(JFrame frame) {
         frame.getContentPane().removeAll();
         frame.revalidate();
@@ -44,6 +44,7 @@ public class GameView {
         frame.setVisible(true);
     }
 
+    // places each button into the grid with its position tracked
     private void buildGrid() {
         GridBagConstraints gbc = new GridBagConstraints();
         for (int row = 0; row < 3; row++) {
@@ -65,6 +66,7 @@ public class GameView {
         buttonPanel.add(resetButton);
     }
 
+    // message panel has the current player on the left and win/draw state in the centre
     private void buildMessagePanel() {
         messagePanel.setPreferredSize(new Dimension(500, 50));
         messagePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
@@ -80,7 +82,7 @@ public class GameView {
         stateLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
         stateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel rightSpacer = new JLabel("");
+        JLabel rightSpacer = new JLabel(""); // keeps the state label visually centred
         rightSpacer.setPreferredSize(currentPlayerLabel.getPreferredSize());
 
         messagePanel.add(currentPlayerLabel, BorderLayout.WEST);
@@ -101,6 +103,7 @@ public class GameView {
         return button;
     }
 
+    // only draws inner borders so the grid doesn't have an outer outline
     private MatteBorder createBorderForPosition(int row, int col) {
         int top    = (row == 0) ? 0 : 5;
         int left   = (col == 0) ? 0 : 5;
@@ -109,6 +112,7 @@ public class GameView {
         return new MatteBorder(top, left, bottom, right, UI.LIGHT_YELLOW);
     }
 
+    // ignores clicks if the game is already over or the cell is taken
     private void onCellClick(int row, int col) {
         if (game.hasWon() || game.hasDrawn()) return;
         try {
@@ -120,6 +124,7 @@ public class GameView {
         updateGameStatus();
     }
 
+    // syncs button text with the board state
     private void updateBoard() {
         for (int row = 0; row < 3; row++)
             for (int col = 0; col < 3; col++)
@@ -135,6 +140,7 @@ public class GameView {
         stateLabel.setText("");
     }
 
+    // updates labels after each move
     private void updateGameStatus() {
         if (game.hasWon()) {
             stateLabel.setText(game.getOtherPlayer() + " Wins");

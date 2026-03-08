@@ -25,6 +25,7 @@ public class AITests {
     }
 
     @Test
+    //test for orignal dumb ai
     void testDumbAIPlacesO() {
         Game game = new Game(Difficulty.DUMB);
         game.makeMove(1, 1);
@@ -38,9 +39,9 @@ public class AITests {
     @Test
     void testAIBlocksWin() {
         Game game = new Game(Difficulty.UNBEATABLE);
-        // X plays, AI responds, X sets up two in a row
+        // X plays, AI respondsX sets up two in a row
         game.makeMove(0, 0); // X top-left
-        game.makeMove(0, 1); // X top-middle - AI should block top-right
+        game.makeMove(0, 1); // X top-middle AI should block top-right
         assertEquals(Board.Token.O, game.getBoard().getToken(0, 2)); // AI should have blocked here
     }
 
